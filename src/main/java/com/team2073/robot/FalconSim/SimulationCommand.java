@@ -28,6 +28,6 @@ public class SimulationCommand extends AbstractLoggingCommand {
     protected void endDelegate() {
         ApplicationContext.getInstance().getSimulationSubsystem().setAllowMovement(false);
         System.out.println("ending");
-        ApplicationContext.getInstance().getSimulationSubsystem().setOutput(0);
+//        ApplicationContext.getInstance().getSimulationSubsystem().setOutput(0);
     }
 }

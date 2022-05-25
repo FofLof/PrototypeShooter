@@ -8,6 +8,7 @@ import com.team2073.common.periodic.AsyncPeriodicRunnable;
 import com.team2073.robot.ApplicationContext;
 import com.team2073.robot.FalconSim.PhysicsSim;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
@@ -38,50 +39,37 @@ public class SimulationSubsystemFalcons implements AsyncPeriodicRunnable {
         testFalcon.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0,0);
         testFalcon.selectProfileSlot(0,0);
         testFalcon.config_kF(0,0,0);
-        testFalcon.config_kP(0,0.2, 0);
+        testFalcon.config_kP(0,p.getDouble(0), 0);
         testFalcon.config_kI(0, i.getDouble(0),0);
         testFalcon.config_kD(0, d.getDouble(0), 0);
         testFalcon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 100, 0);
         testFalcon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 100, 0);
+        testFalcon.configMotionCruiseVelocity(15000, 0);
+        testFalcon.configMotionAcceleration(6000, 0);
     }
 
 
 
     @Override
     public void onPeriodicAsync() {
+        testFalcon.config_kP(0,p.getDouble(0), 0);
+        testFalcon.config_kI(0, i.getDouble(0),0);
+        testFalcon.config_kD(0, d.getDouble(0), 0);
         PhysicsSim.getInstance().run();
         count++;
         if (count > 100) {
-//            System.out.println(testMotor.getEncoder().getPosition());
             count = 0;
             System.out.println(goal.getDouble(0));
         }
-//        testMotor.getEncoder().setPosition(1000);
-        testFalcon.set(ControlMode.MotionMagic, 2000);
-//        testMotor.set(1);
+//
         if (allowMovement) {
-//            setPID();
-//            testMotor.set(simulationPID.getOutput());
-            testFalcon.set(ControlMode.MotionMagic, 2000);
+            testFalcon.set(ControlMode.MotionMagic, goal.getDouble(0));
+        } else {
+            testFalcon.set(ControlMode.PercentOutput, new Joystick(0).getRawAxis(0));
         }
-    }
-
-    public void setPID() {
-        simulationPID.updatePID();
-    }
-
-    public void updateGoal() {
-//        simulationPID.updateSetPoint(goal.getDouble(0));
-//        simulationPID.updateSetPoint(1000);
     }
 
     public void setAllowMovement(boolean allowMovement) {
         this.allowMovement = allowMovement;
     }
-
-    public void setOutput(double output) {
-        testMotor.set(output);
-    }
-
-
 }
