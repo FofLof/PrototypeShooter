@@ -14,9 +14,9 @@ public class RobotDelegate extends AbstractRobotDelegate {
     }
     @Override
     public void robotInit() {
-        simulationSubsystem = appCTX.getSimulationSubsystem();
+//        simulationSubsystem = appCTX.getSimulationSubsystem();
         oi.init();
-        appCTX.getMotor1().getEncoder().setPosition(1000);
+//        appCTX.getMotor1().getEncoder().setPosition(1000);
     }
 
     @Override

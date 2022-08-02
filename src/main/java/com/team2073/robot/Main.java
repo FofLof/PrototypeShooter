@@ -6,6 +6,6 @@ import java.awt.*;
 
 public class Main {
     public static void main(String... args) {
-        RobotApplication.start(() -> new RobotDelegate(0.1));
+        RobotApplication.start(() -> new RobotDelegate(0.02));
     }
 }

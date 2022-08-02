@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "idea"
-    id "edu.wpi.first.GradleRIO" version "2022.3.1"
+    id "edu.wpi.first.GradleRIO" version "2022.4.1"
 }
 
 
@@ -17,7 +17,7 @@ repositories {
 }
 
 def COMMON_VERSION = '0.5.0-SNAPSHOT'
-def ROBOT_MAIN_CLASS = "com.team2073.robot.Main"
+def ROBOT_MAIN_CLASS = "com.team2073.robot.armsimulation.Main"
 
 // Pass arguments via command line to active different modes
 // Ex: ./gradlew deploy -Psim
@@ -120,8 +120,8 @@ dependencies {
 
 }
 
-wpi.sim.addGui().defaultEnabled = true
-wpi.sim.addDriverstation()
+    wpi.sim.addGui().defaultEnabled = true
+    wpi.sim.addDriverstation()
 
 
 wrapper {

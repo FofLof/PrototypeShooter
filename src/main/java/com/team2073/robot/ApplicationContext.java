@@ -47,14 +47,14 @@ public class ApplicationContext {
 
     public CANSparkMax getMotor1() {
         if (motor1 == null) {
-            motor1 = new CANSparkMax(1, kMotorType);
+            motor1 = new CANSparkMax(2, kMotorType);
         }
         return motor1;
     }
 
     public CANSparkMax getMotor2() {
         if (motor2 == null) {
-            motor2 = new CANSparkMax(2, kMotorType);
+            motor2 = new CANSparkMax(3, kMotorType);
         }
         return motor2;
     }
